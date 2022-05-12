@@ -10,7 +10,7 @@ export function getCurrentTurnElement() {
     return document.getElementById('currentTurn')
 }
 export function getCellElementAtIdx(index) {
-    return document.querySelector(`#cellList >li:nth-child(${index + 1})`)
+    return document.querySelector(`#cellList >li:nth-chile(${index + 1})`)
 }
 export function getGameStatusElement() {
     return document.getElementById('gameStatus')

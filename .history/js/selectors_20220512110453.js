@@ -9,9 +9,5 @@ export function getCellElementList() {
 export function getCurrentTurnElement() {
     return document.getElementById('currentTurn')
 }
-export function getCellElementAtIdx(index) {
-    return document.querySelector(`#cellList >li:nth-child(${index + 1})`)
-}
-export function getGameStatusElement() {
-    return document.getElementById('gameStatus')
-}
+export function getCellElementAtIdx() {}
+export function getGameStatusElement() {}
