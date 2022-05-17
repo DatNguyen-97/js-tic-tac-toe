@@ -3,8 +3,7 @@ import { getCellElementAtIdx,
     getCellElementList,
     getCurrentTurnElement,
     getGameStatusElement,
-    getRelayButtonElement,
-    getCellListElement }
+    getRelayButtonElement }
         from "./selectors.js";
 
 import {checkGameStatus} from './utils.js';
@@ -90,23 +89,11 @@ function handleCellClick (cell,index) {
 }
 
 function initCellElementList() {
-    const liList = getCellElementList();
-
-    liList.forEach((cell,index) => {
+    const cellElementList = getCellElementList();
+    cellElementList.forEach((cell,index) => {
         //cell.addEventListener("click", () => handleCellClick(cell,index));
         cell.dataset.idx = index;
     })
-
-    const ulElement = getCellListElement();
-    if(ulElement){
-        ulElement.addEventListener('click',(event) => {
-            if(event.target.tagName !== 'LI') return;
-
-            const index = Number.parseInt(event.target.dataset.idx);
-            handleCellClick(event.target,index)
-        })
-    }
-
 
 }
 

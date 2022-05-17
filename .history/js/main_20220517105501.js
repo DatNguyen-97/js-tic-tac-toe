@@ -90,8 +90,7 @@ function handleCellClick (cell,index) {
 }
 
 function initCellElementList() {
-    const liList = getCellElementList();
-
+    const lilist = getCellElementList();
     liList.forEach((cell,index) => {
         //cell.addEventListener("click", () => handleCellClick(cell,index));
         cell.dataset.idx = index;
