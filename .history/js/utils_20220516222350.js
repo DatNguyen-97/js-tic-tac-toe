@@ -70,28 +70,11 @@ export function checkGameStatus(cellValues) {
 
   if(winSetIndex >= 0) {
     const winValueIndex = checkList[winSetIndex][1];
-    const winValue = cellValues[winValueIndex]
-
+    const winValue = cellValues[winSetIndex]
     return {
       status: winValue === CELL_VALUE.CIRCLE ? GAME_STATUS.O_WIN : GAME_STATUS.X_WIN,
       winPositions: checkList[winSetIndex],
     };
   }
-
-  //end game 
-
-  if(cellValues.filter( x => x === '').length === 0) {
-    return {
-      status: GAME_STATUS.ENDED,
-      winPositions: [],
-    };
-  }
-
-// playing 
-
-return {
-  status: GAME_STATUS.PLAYING,
-  winPositions: [],
-};
   
 }

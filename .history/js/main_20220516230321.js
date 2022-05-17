@@ -1,9 +1,8 @@
 import { TURN,CELL_VALUE,GAME_STATUS } from './constants.js';
 import { getCellElementAtIdx,
-    getCellElementList,
-    getCurrentTurnElement,
-    getGameStatusElement,
-    getRelayButtonElement }
+     getCellElementList,
+      getCurrentTurnElement,
+       getGameStatusElement }
         from "./selectors.js";
 
 import {checkGameStatus} from './utils.js';
@@ -28,26 +27,6 @@ function toggleTurn() {
     }
 }
 
-function updateGameStatus(newGameStatus) {
-    gameStatus = newGameStatus;
-
-    const gameStatusElement = getGameStatusElement();
-    if(gameStatusElement) gameStatusElement.textContent = newGameStatus;
-}
-function showRelayButton() {
-    const replayButton = getRelayButtonElement();
-    if(replayButton) replayButton.classList.add('show')
-}
-function highlightWinCells(winPosition) {
-    if(!Array.isArray(winPosition) || winPosition.length !== 3) {
-        throw new Error('Invalid win position')
-    }
-
-    winPosition.forEach(winIndex => {
-        getCellElementAtIdx(winIndex).classList.add('win')
-    })
-}
-
 function handleCellClick (cell,index) {
     const isClicked = cell.classList.contains(TURN.CIRCLE) || cell.classList.contains(TURN.CROSS);
     const isEndGame = gameStatus !== GAME_STATUS.PLAYING
@@ -63,20 +42,15 @@ function handleCellClick (cell,index) {
     const game = checkGameStatus(cellValues)
     switch(game.status) {
         case GAME_STATUS.ENDED: {
-            //update game status
+            // update game status
             //show replay button
-            updateGameStatus(game.status)
-            showRelayButton()
             break;
         }
         case GAME_STATUS.O_WIN:
-        case GAME_STATUS.X_WIN: {
+        case GAME_STATUS.X_WIN : {
             //update game status
             //show replay button
             //highlight win cells
-            updateGameStatus(game.status)
-            showRelayButton()
-            highlightWinCells(game.winPositions)
             break;
         }
         
@@ -94,42 +68,6 @@ function initCellElementList() {
         cell.addEventListener("click", () => handleCellClick(cell,index));
     })
 
-}
-
-function hideReplayButton() {
-    const replayButton = getRelayButtonElement();
-    if(replayButton) replayButton.classList.remove('show')
-}
-
-function resetGame (game) {
-    //reset temp global variables
-    currentTurn = TURN.CROSS;
-    gameStatus = GAME_STATUS.PLAYING;
-    cellValues = cellValues.map(() => '');
-    //reset dom elements
-    //reset game status
-    updateGameStatus(GAME_STATUS.PLAYING)
-    //reset current turn
-    const currentTurnElement = getCurrentTurnElement();
-    if(currentTurnElement) {
-        currentTurnElement.classList.remove(TURN.CROSS,TURN.CIRCLE);
-        currentTurnElement.classList.add(TURN.CROSS)
-    }
-    //reset game board
-    const cellElementList = getCellElementList();
-    cellElementList.forEach(cell => {
-        cell.className = '';
-    })
-    //hide replay burron   
-    hideReplayButton();
-}
-
-
-function initReplayButton () {
-    const replayButton = getRelayButtonElement();
-    if (replayButton) {
-        replayButton.addEventListener('click', resetGame)
-    }
 }
 
 /**
@@ -152,5 +90,4 @@ function initReplayButton () {
     // bind click event for all li elements
     initCellElementList();
     // bind click event for replay button
-    initReplayButton();
 })()

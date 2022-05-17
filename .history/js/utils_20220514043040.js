@@ -1,4 +1,3 @@
-import {GAME_STATUS,CELL_VALUE} from './constants.js';
 // Write a function to check status of tic-tac-toe game
 // Ref: what is tic-tac-toe game: https://en.wikipedia.org/wiki/Tic-tac-toe
 // In summary, tic-tac-toe game has 9 cells divided into 3 rows of 3 cells.
@@ -56,42 +55,12 @@ export function checkGameStatus(cellValues) {
     [2,5,8],
 
     [0,4,8],
-    [2,4,6 ],
+    [2,4,6],
 
   ];
-  //win 
-  const winSetIndex = checkList.findIndex(set => {
-    const first = cellValues[set[0]];
-    const second = cellValues[set[1]];
-    const third = cellValues[set[2]];
 
-    return first !== '' && first === second && second === third;
-  })
-
-  if(winSetIndex >= 0) {
-    const winValueIndex = checkList[winSetIndex][1];
-    const winValue = cellValues[winValueIndex]
-
-    return {
-      status: winValue === CELL_VALUE.CIRCLE ? GAME_STATUS.O_WIN : GAME_STATUS.X_WIN,
-      winPositions: checkList[winSetIndex],
-    };
-  }
-
-  //end game 
-
-  if(cellValues.filter( x => x === '').length === 0) {
-    return {
-      status: GAME_STATUS.ENDED,
-      winPositions: [],
-    };
-  }
-
-// playing 
-
-return {
-  status: GAME_STATUS.PLAYING,
-  winPositions: [],
-};
-  
+  return {
+    status: GAME_STATUS.PLAYING,
+    winPositions: [],
+  };
 }

@@ -96,37 +96,23 @@ function initCellElementList() {
 
 }
 
-function hideReplayButton() {
-    const replayButton = getRelayButtonElement();
-    if(replayButton) replayButton.classList.remove('show')
-}
-
 function resetGame (game) {
     //reset temp global variables
     currentTurn = TURN.CROSS;
     gameStatus = GAME_STATUS.PLAYING;
-    cellValues = cellValues.map(() => '');
+    cellValues = cellValues.map(x => '');
     //reset dom elements
     //reset game status
     updateGameStatus(GAME_STATUS.PLAYING)
     //reset current turn
-    const currentTurnElement = getCurrentTurnElement();
-    if(currentTurnElement) {
-        currentTurnElement.classList.remove(TURN.CROSS,TURN.CIRCLE);
-        currentTurnElement.classList.add(TURN.CROSS)
-    }
     //reset game board
-    const cellElementList = getCellElementList();
-    cellElementList.forEach(cell => {
-        cell.className = '';
-    })
-    //hide replay burron   
-    hideReplayButton();
+    //reset replay burron   
+
 }
 
 
 function initReplayButton () {
-    const replayButton = getRelayButtonElement();
+    const replayButton = getReplayButton();
     if (replayButton) {
         replayButton.addEventListener('click', resetGame)
     }

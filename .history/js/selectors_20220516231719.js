@@ -16,5 +16,5 @@ export function getGameStatusElement() {
     return document.getElementById('gameStatus')
 }
 export function getRelayButtonElement() {
-    return document.getElementById('replayGame')
+    return document.querySelector('relayGame')
 }

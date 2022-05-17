@@ -87,11 +87,6 @@ export function checkGameStatus(cellValues) {
     };
   }
 
-// playing 
 
-return {
-  status: GAME_STATUS.PLAYING,
-  winPositions: [],
-};
   
 }

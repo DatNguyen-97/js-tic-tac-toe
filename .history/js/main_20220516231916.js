@@ -38,15 +38,7 @@ function showRelayButton() {
     const replayButton = getRelayButtonElement();
     if(replayButton) replayButton.classList.add('show')
 }
-function highlightWinCells(winPosition) {
-    if(!Array.isArray(winPosition) || winPosition.length !== 3) {
-        throw new Error('Invalid win position')
-    }
-
-    winPosition.forEach(winIndex => {
-        getCellElementAtIdx(winIndex).classList.add('win')
-    })
-}
+function highlightWinCells(winPosition) {}
 
 function handleCellClick (cell,index) {
     const isClicked = cell.classList.contains(TURN.CIRCLE) || cell.classList.contains(TURN.CROSS);
@@ -70,7 +62,7 @@ function handleCellClick (cell,index) {
             break;
         }
         case GAME_STATUS.O_WIN:
-        case GAME_STATUS.X_WIN: {
+        case GAME_STATUS.X_WIN : {
             //update game status
             //show replay button
             //highlight win cells
@@ -96,42 +88,6 @@ function initCellElementList() {
 
 }
 
-function hideReplayButton() {
-    const replayButton = getRelayButtonElement();
-    if(replayButton) replayButton.classList.remove('show')
-}
-
-function resetGame (game) {
-    //reset temp global variables
-    currentTurn = TURN.CROSS;
-    gameStatus = GAME_STATUS.PLAYING;
-    cellValues = cellValues.map(() => '');
-    //reset dom elements
-    //reset game status
-    updateGameStatus(GAME_STATUS.PLAYING)
-    //reset current turn
-    const currentTurnElement = getCurrentTurnElement();
-    if(currentTurnElement) {
-        currentTurnElement.classList.remove(TURN.CROSS,TURN.CIRCLE);
-        currentTurnElement.classList.add(TURN.CROSS)
-    }
-    //reset game board
-    const cellElementList = getCellElementList();
-    cellElementList.forEach(cell => {
-        cell.className = '';
-    })
-    //hide replay burron   
-    hideReplayButton();
-}
-
-
-function initReplayButton () {
-    const replayButton = getRelayButtonElement();
-    if (replayButton) {
-        replayButton.addEventListener('click', resetGame)
-    }
-}
-
 /**
  * TODOs
  *
@@ -152,5 +108,4 @@ function initReplayButton () {
     // bind click event for all li elements
     initCellElementList();
     // bind click event for replay button
-    initReplayButton();
 })()

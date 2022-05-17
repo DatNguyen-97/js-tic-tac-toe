@@ -96,11 +96,6 @@ function initCellElementList() {
 
 }
 
-function hideReplayButton() {
-    const replayButton = getRelayButtonElement();
-    if(replayButton) replayButton.classList.remove('show')
-}
-
 function resetGame (game) {
     //reset temp global variables
     currentTurn = TURN.CROSS;
@@ -118,10 +113,11 @@ function resetGame (game) {
     //reset game board
     const cellElementList = getCellElementList();
     cellElementList.forEach(cell => {
-        cell.className = '';
+        cellElementList.classList.remove(TURN.CROSS,TURN.CIRCLE)
     })
     //hide replay burron   
-    hideReplayButton();
+    const replayButton = getRelayButtonElement();
+    if(replayButton) replayButton.classList.remove('show')
 }
 
 
